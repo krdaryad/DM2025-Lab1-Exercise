@@ -36,3 +36,12 @@ def tokenize_text(text, remove_stopwords=False):
             # filters here
             tokens.append(word)
     return tokens
+def add_text_features(df, text_column='text'):
+    """
+    Add helper features for text mining:
+    - doc_length: number of characters
+    - word_count: number of words
+    """
+    df['doc_length'] = df[text_column].apply(len)
+    df['word_count'] = df[text_column].apply(lambda t: len(t.split()))
+    return df
